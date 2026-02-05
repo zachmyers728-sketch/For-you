@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Will You Be My Valentine?</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffd6e8, #ffeaf3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      max-width: 320px;
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 20px;
+      color: #ff5f9e;
+    }
+
+    p {
+      color: #555;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+
+    button {
+      background: #ff5f9e;
+      color: white;
+      border: none;
+      padding: 14px 26px;
+      border-radius: 30px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    button:hover {
+      background: #ff3f87;
+      transform: scale(1.05);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      color: #ff5f9e;
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-110vh) scale(1.4);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Hi pookie!!💗</h1>
+    <p>Being far from you everyday is such a big challenge, 
+      but you really make it worth it</p>
+    <button onclick="askValentine()">Tap me</button>
+
+    <div id="question" class="hidden">
+      <h1>Will you be my Valentine?</h1>
+      <button onclick="sayYes()">Yes 💕</button>
+    </div>
+
+    <div id="answer" class="hidden">
+      <h1>Yay 🥰</h1>
+      <p>I love you so much!<br>and I cant wait to come visit</p>
+    </div>
+  </div>
+
+  <script>
+    function askValentine() {
+      document.querySelector("button").style.display = "none";
+      document.getElementById("question").classList.remove("hidden");
+    }
+
+    function sayYes() {
+      document.getElementById("question").classList.add("hidden");
+      document.getElementById("answer").classList.remove("hidden");
+    }
+
+    // Generate floating hearts
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "💗";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 8000);
+    }
+
+    setInterval(createHeart, 500);
+  </script>
+
+</body>
+</html>
